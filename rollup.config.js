@@ -37,7 +37,7 @@ export default {
 		sourcemap: false,
 		format: 'iife',
 		name: 'app',
-		file: 'build/bundle.js'
+		file: 'public/build/bundle.js'
 		
 
 	},
