@@ -22,7 +22,7 @@ devDependencies:
     version: 4.0.2
   rollup-plugin-css-only:
     specifier: ^4.3.0
-    version: 4.3.0(rollup@4.0.2)
+    version: 4.5.2(rollup@4.0.2)
   rollup-plugin-livereload:
     specifier: ^2.0.5
     version: 2.0.5
@@ -1734,13 +1734,13 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup-plugin-css-only@4.3.0(rollup@4.0.2):
-    resolution: {integrity: sha512-BsiCqJJQzZh2lQiHY5irejRoJ3I1EUFHEi5PjVqsr+EmOh54YrWVwd3YZEXnQJ2+fzlhif0YM/Kf0GuH90GAdQ==}
+  /rollup-plugin-css-only@4.5.2(rollup@4.0.2):
+    resolution: {integrity: sha512-7rj9+jB17Pz8LNcPgtMUb16JcgD8lxQMK9HcGfAVhMK3na/WXes3oGIo5QsrQQVqtgAU6q6KnQNXJrYunaUIQQ==}
     engines: {node: '>=14'}
     peerDependencies:
-      rollup: <4
+      rollup: <5
     dependencies:
-      '@rollup/pluginutils': 5.0.5(rollup@4.0.2)
+      '@rollup/pluginutils': 5.1.0(rollup@4.0.2)
       rollup: 4.0.2
     dev: true
 
