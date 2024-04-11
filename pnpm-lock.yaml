@@ -31,7 +31,7 @@ devDependencies:
     version: 7.2.0(rollup@4.14.1)(svelte@4.2.13)
   sass:
     specifier: ^1.71.1
-    version: 1.74.1
+    version: 1.75.0
   sirv-cli:
     specifier: ^2.0.2
     version: 2.0.2
@@ -40,7 +40,7 @@ devDependencies:
     version: 4.2.13
   svelte-preprocess:
     specifier: ^5.1.3
-    version: 5.1.3(sass@1.74.1)(svelte@4.2.13)
+    version: 5.1.3(sass@1.75.0)(svelte@4.2.13)
 
 packages:
 
@@ -1859,8 +1859,8 @@ packages:
       yargs: 17.7.2
     dev: true
 
-  /sass@1.74.1:
-    resolution: {integrity: sha512-w0Z9p/rWZWelb88ISOLyvqTWGmtmu2QJICqDBGyNnfG4OUnPX9BBjjYIXUpXCMOOg5MQWNpqzt876la1fsTvUA==}
+  /sass@1.75.0:
+    resolution: {integrity: sha512-ShMYi3WkrDWxExyxSZPst4/okE9ts46xZmJDSawJQrnte7M1V9fScVB+uNXOVKRBt0PggHOwoZcn8mYX4trnBw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -2115,7 +2115,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-preprocess@5.1.3(sass@1.74.1)(svelte@4.2.13):
+  /svelte-preprocess@5.1.3(sass@1.75.0)(svelte@4.2.13):
     resolution: {integrity: sha512-xxAkmxGHT+J/GourS5mVJeOXZzne1FR5ljeOUAMXUkfEhkLEllRreXpbl3dIYJlcJRfL1LO1uIAPpBpBfiqGPw==}
     engines: {node: '>= 16.0.0', pnpm: ^8.0.0}
     requiresBuild: true
@@ -2156,7 +2156,7 @@ packages:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
       magic-string: 0.30.7
-      sass: 1.74.1
+      sass: 1.75.0
       sorcery: 0.11.0
       strip-indent: 3.0.0
       svelte: 4.2.13
