@@ -34,7 +34,7 @@ importers:
         version: 7.2.0(rollup@4.16.4)(svelte@4.2.15)
       sass:
         specifier: ^1.71.1
-        version: 1.76.0
+        version: 1.77.0
       sirv-cli:
         specifier: ^2.0.2
         version: 2.0.2
@@ -43,7 +43,7 @@ importers:
         version: 4.2.15
       svelte-preprocess:
         specifier: ^5.1.3
-        version: 5.1.4(sass@1.76.0)(svelte@4.2.15)
+        version: 5.1.4(sass@1.77.0)(svelte@4.2.15)
 
 packages:
 
@@ -1037,8 +1037,8 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
-  sass@1.76.0:
-    resolution: {integrity: sha512-nc3LeqvF2FNW5xGF1zxZifdW3ffIz5aBb7I7tSvOoNu7z1RQ6pFt9MBuiPtjgaI62YWrM/txjWlOCFiGtf2xpw==}
+  sass@1.77.0:
+    resolution: {integrity: sha512-eGj4HNfXqBWtSnvItNkn7B6icqH14i3CiCGbzMKs3BAPTq62pp9NBYsBgyN4cA+qssqo9r26lW4JSvlaUUWbgw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -2390,7 +2390,7 @@ snapshots:
       scss-tokenizer: 0.4.3
       yargs: 17.7.2
 
-  sass@1.76.0:
+  sass@1.77.0:
     dependencies:
       chokidar: 3.6.0
       immutable: 4.3.5
@@ -2543,7 +2543,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@5.1.4(sass@1.76.0)(svelte@4.2.15):
+  svelte-preprocess@5.1.4(sass@1.77.0)(svelte@4.2.15):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
@@ -2552,7 +2552,7 @@ snapshots:
       strip-indent: 3.0.0
       svelte: 4.2.15
     optionalDependencies:
-      sass: 1.76.0
+      sass: 1.77.0
 
   svelte@4.2.15:
     dependencies:
