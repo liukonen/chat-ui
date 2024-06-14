@@ -43,7 +43,7 @@ importers:
         version: 4.2.18
       svelte-preprocess:
         specifier: ^6.0.0
-        version: 6.0.0(sass@1.77.5)(svelte@4.2.18)
+        version: 6.0.1(sass@1.77.5)(svelte@4.2.18)
 
 packages:
 
@@ -1214,8 +1214,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svelte-preprocess@6.0.0:
-    resolution: {integrity: sha512-sbyHnWBwIphuaJWC7hnJd6ZoW/VN0va3jVb/8dDfeT2+0hVmo1DCx+zBK0/JfUKQmzg/FOEtcsGKRnbt8pRRkw==}
+  svelte-preprocess@6.0.1:
+    resolution: {integrity: sha512-vNgXoyqWwahdpEX9XbQHcAHt41TkXnf8bRDxT5PjISHbZD1dVH4b2OsJ2fVQTBb3qP05x0GuYE9iS5vhD+Dniw==}
     engines: {node: '>= 18.0.0'}
     peerDependencies:
       '@babel/core': ^7.10.2
@@ -2609,7 +2609,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@6.0.0(sass@1.77.5)(svelte@4.2.18):
+  svelte-preprocess@6.0.1(sass@1.77.5)(svelte@4.2.18):
     dependencies:
       detect-indent: 6.1.0
       strip-indent: 3.0.0
