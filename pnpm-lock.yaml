@@ -34,7 +34,7 @@ importers:
         version: 7.2.2(rollup@4.22.2)(svelte@4.2.19)
       sass:
         specifier: ^1.71.1
-        version: 1.79.2
+        version: 1.79.3
       sirv-cli:
         specifier: ^2.0.2
         version: 2.0.2
@@ -43,7 +43,7 @@ importers:
         version: 4.2.19
       svelte-preprocess:
         specifier: ^6.0.0
-        version: 6.0.2(sass@1.79.2)(svelte@4.2.19)
+        version: 6.0.2(sass@1.79.3)(svelte@4.2.19)
 
 packages:
 
@@ -1080,8 +1080,8 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
-  sass@1.79.2:
-    resolution: {integrity: sha512-YmT1aoF1MwHsZEu/eXhbAJNsPGAhNP4UixW9ckEwWCvPcVdVF0/C104OGDVEqtoctKq0N+wM20O/rj+sSPsWeg==}
+  sass@1.79.3:
+    resolution: {integrity: sha512-m7dZxh0W9EZ3cw50Me5GOuYm/tVAJAn91SUnohLRo9cXBixGUOdvmryN+dXpwR831bhoY3Zv7rEFt85PUwTmzA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -2476,7 +2476,7 @@ snapshots:
       scss-tokenizer: 0.4.3
       yargs: 17.7.2
 
-  sass@1.79.2:
+  sass@1.79.3:
     dependencies:
       chokidar: 4.0.0
       immutable: 4.3.7
@@ -2634,11 +2634,11 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@6.0.2(sass@1.79.2)(svelte@4.2.19):
+  svelte-preprocess@6.0.2(sass@1.79.3)(svelte@4.2.19):
     dependencies:
       svelte: 4.2.19
     optionalDependencies:
-      sass: 1.79.2
+      sass: 1.79.3
 
   svelte@4.2.19:
     dependencies:
