@@ -19,7 +19,7 @@
     "rollup-plugin-svelte": "^7.1.6",
     "sass": "^1.71.1",
     "sirv-cli": "^3.0.0",
-    "svelte": "^4.2.12",
+    "svelte": "^5.0.0",
     "svelte-preprocess": "^6.0.0"
   }
 }
