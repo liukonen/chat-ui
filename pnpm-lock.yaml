@@ -34,7 +34,7 @@ importers:
         version: 7.2.2(rollup@4.29.1)(svelte@5.16.1)
       sass:
         specifier: ^1.71.1
-        version: 1.83.0
+        version: 1.83.1
       sirv-cli:
         specifier: ^3.0.0
         version: 3.0.0
@@ -43,7 +43,7 @@ importers:
         version: 5.16.1
       svelte-preprocess:
         specifier: ^6.0.0
-        version: 6.0.3(sass@1.83.0)(svelte@5.16.1)
+        version: 6.0.3(sass@1.83.1)(svelte@5.16.1)
 
 packages:
 
@@ -465,8 +465,8 @@ packages:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
 
-  chokidar@4.0.1:
-    resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
+  chokidar@4.0.3:
+    resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
 
   chownr@2.0.0:
@@ -1142,8 +1142,8 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
-  sass@1.83.0:
-    resolution: {integrity: sha512-qsSxlayzoOjdvXMVLkzF84DJFc2HZEL/rFyGIKbbilYtAvlCxyuzUeff9LawTn4btVnLKg75Z8MMr1lxU1lfGw==}
+  sass@1.83.1:
+    resolution: {integrity: sha512-EVJbDaEs4Rr3F0glJzFSOvtg2/oy2V/YrGFPqPY24UqcLDWcI9ZY5sN+qyO3c/QCZwzgfirvhXvINiJCE/OLcA==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -1825,7 +1825,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  chokidar@4.0.1:
+  chokidar@4.0.3:
     dependencies:
       readdirp: 4.0.2
 
@@ -2545,9 +2545,9 @@ snapshots:
       scss-tokenizer: 0.4.3
       yargs: 17.7.2
 
-  sass@1.83.0:
+  sass@1.83.1:
     dependencies:
-      chokidar: 4.0.1
+      chokidar: 4.0.3
       immutable: 5.0.3
       source-map-js: 1.2.1
     optionalDependencies:
@@ -2693,11 +2693,11 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@6.0.3(sass@1.83.0)(svelte@5.16.1):
+  svelte-preprocess@6.0.3(sass@1.83.1)(svelte@5.16.1):
     dependencies:
       svelte: 5.16.1
     optionalDependencies:
-      sass: 1.83.0
+      sass: 1.83.1
 
   svelte@5.16.1:
     dependencies:
