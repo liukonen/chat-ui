@@ -31,7 +31,7 @@ importers:
         version: 2.0.5
       rollup-plugin-svelte:
         specifier: ^7.1.6
-        version: 7.2.2(rollup@4.30.1)(svelte@5.17.2)
+        version: 7.2.2(rollup@4.30.1)(svelte@5.17.3)
       sass:
         specifier: ^1.71.1
         version: 1.83.1
@@ -40,10 +40,10 @@ importers:
         version: 3.0.0
       svelte:
         specifier: ^5.0.0
-        version: 5.17.2
+        version: 5.17.3
       svelte-preprocess:
         specifier: ^6.0.0
-        version: 6.0.3(sass@1.83.1)(svelte@5.17.2)
+        version: 6.0.3(sass@1.83.1)(svelte@5.17.3)
 
 packages:
 
@@ -581,8 +581,8 @@ packages:
   esm-env@1.2.2:
     resolution: {integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==}
 
-  esrap@1.3.3:
-    resolution: {integrity: sha512-zO/nCAXn5Bzl5xaqoCuvsJdUgYSawQ1FWN5OZrvFy9DYtVa8EKiyOBmGibnf3dAHr/m5aeD76bPIB72CKH1YvQ==}
+  esrap@1.4.1:
+    resolution: {integrity: sha512-MNzHxRS7u1M7vQt8bGjPPEWQXQR4llEgzJQrf5RYiZqwfYHw6Xc5VeUCTJBeLYGYFauun9d1WMq3Eq2bRyUojg==}
 
   estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
@@ -1316,8 +1316,8 @@ packages:
       typescript:
         optional: true
 
-  svelte@5.17.2:
-    resolution: {integrity: sha512-gCmHIPY8gW2GF0t59vkkJJgEDo6cf3ygvA62wHn6PBCRSZgJa35tOJsVO0PT1u0ulJhNjTx2y5k8pgutTtxhlQ==}
+  svelte@5.17.3:
+    resolution: {integrity: sha512-eLgtpR2JiTgeuNQRCDcLx35Z7Lu9Qe09GPOz+gvtR9nmIZu5xgFd6oFiLGQlxLD0/u7xVyF5AUkjDVyFHe6Bvw==}
     engines: {node: '>=18'}
 
   tar@6.2.0:
@@ -1912,7 +1912,7 @@ snapshots:
 
   esm-env@1.2.2: {}
 
-  esrap@1.3.3:
+  esrap@1.4.1:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
@@ -2495,12 +2495,12 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  rollup-plugin-svelte@7.2.2(rollup@4.30.1)(svelte@5.17.2):
+  rollup-plugin-svelte@7.2.2(rollup@4.30.1)(svelte@5.17.3):
     dependencies:
       '@rollup/pluginutils': 4.2.1
       resolve.exports: 2.0.2
       rollup: 4.30.1
-      svelte: 5.17.2
+      svelte: 5.17.3
 
   rollup@4.30.1:
     dependencies:
@@ -2693,13 +2693,13 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@6.0.3(sass@1.83.1)(svelte@5.17.2):
+  svelte-preprocess@6.0.3(sass@1.83.1)(svelte@5.17.3):
     dependencies:
-      svelte: 5.17.2
+      svelte: 5.17.3
     optionalDependencies:
       sass: 1.83.1
 
-  svelte@5.17.2:
+  svelte@5.17.3:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -2710,7 +2710,7 @@ snapshots:
       axobject-query: 4.1.0
       clsx: 2.1.1
       esm-env: 1.2.2
-      esrap: 1.3.3
+      esrap: 1.4.1
       is-reference: 3.0.3
       locate-character: 3.0.0
       magic-string: 0.30.17
