@@ -31,7 +31,7 @@ importers:
         version: 2.0.5
       rollup-plugin-svelte:
         specifier: ^7.1.6
-        version: 7.2.2(rollup@4.36.0)(svelte@5.25.2)
+        version: 7.2.2(rollup@4.36.0)(svelte@5.25.3)
       sass:
         specifier: ^1.71.1
         version: 1.86.0
@@ -40,10 +40,10 @@ importers:
         version: 3.0.1
       svelte:
         specifier: ^5.0.0
-        version: 5.25.2
+        version: 5.25.3
       svelte-preprocess:
         specifier: ^6.0.0
-        version: 6.0.3(sass@1.86.0)(svelte@5.25.2)
+        version: 6.0.3(sass@1.86.0)(svelte@5.25.3)
 
 packages:
 
@@ -1314,8 +1314,8 @@ packages:
       typescript:
         optional: true
 
-  svelte@5.25.2:
-    resolution: {integrity: sha512-IxmBz4x15+bNbowhygUlwoVgqMLfEIDtyjUFDfOwb1f+7Fe5qeLfwGJHMql7QUSJBqNtXcOCPsZDDmuieZcpfA==}
+  svelte@5.25.3:
+    resolution: {integrity: sha512-J9rcZ/xVJonAoESqVGHHZhrNdVbrCfkdB41BP6eiwHMoFShD9it3yZXApVYMHdGfCshBsZCKsajwJeBbS/M1zg==}
     engines: {node: '>=18'}
 
   tar@6.2.0:
@@ -2489,12 +2489,12 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  rollup-plugin-svelte@7.2.2(rollup@4.36.0)(svelte@5.25.2):
+  rollup-plugin-svelte@7.2.2(rollup@4.36.0)(svelte@5.25.3):
     dependencies:
       '@rollup/pluginutils': 4.2.1
       resolve.exports: 2.0.2
       rollup: 4.36.0
-      svelte: 5.25.2
+      svelte: 5.25.3
 
   rollup@4.36.0:
     dependencies:
@@ -2687,13 +2687,13 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@6.0.3(sass@1.86.0)(svelte@5.25.2):
+  svelte-preprocess@6.0.3(sass@1.86.0)(svelte@5.25.3):
     dependencies:
-      svelte: 5.25.2
+      svelte: 5.25.3
     optionalDependencies:
       sass: 1.86.0
 
-  svelte@5.25.2:
+  svelte@5.25.3:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
