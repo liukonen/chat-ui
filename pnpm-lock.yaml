@@ -31,7 +31,7 @@ importers:
         version: 2.0.5
       rollup-plugin-svelte:
         specifier: ^7.1.6
-        version: 7.2.2(rollup@4.38.0)(svelte@5.25.3)
+        version: 7.2.2(rollup@4.38.0)(svelte@5.25.5)
       sass:
         specifier: ^1.71.1
         version: 1.86.1
@@ -40,10 +40,10 @@ importers:
         version: 3.0.1
       svelte:
         specifier: ^5.0.0
-        version: 5.25.3
+        version: 5.25.5
       svelte-preprocess:
         specifier: ^6.0.0
-        version: 6.0.3(sass@1.86.1)(svelte@5.25.3)
+        version: 6.0.3(sass@1.86.1)(svelte@5.25.5)
 
 packages:
 
@@ -350,9 +350,6 @@ packages:
   '@tootallnate/once@2.0.0':
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
-
-  '@types/estree@1.0.6':
-    resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
@@ -1322,8 +1319,8 @@ packages:
       typescript:
         optional: true
 
-  svelte@5.25.3:
-    resolution: {integrity: sha512-J9rcZ/xVJonAoESqVGHHZhrNdVbrCfkdB41BP6eiwHMoFShD9it3yZXApVYMHdGfCshBsZCKsajwJeBbS/M1zg==}
+  svelte@5.25.5:
+    resolution: {integrity: sha512-ULi9rkVWQJyJYZSpy6SIgSTchWadyWG1QYAUx3JAXL2gXrnhdXtoB20KmXGSNdtNyquq3eYd/gkwAkLcL5PGWw==}
     engines: {node: '>=18'}
 
   tar@6.2.0:
@@ -1599,7 +1596,7 @@ snapshots:
 
   '@rollup/pluginutils@5.1.0(rollup@4.38.0)':
     dependencies:
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       estree-walker: 2.0.2
       picomatch: 2.3.1
     optionalDependencies:
@@ -1607,7 +1604,7 @@ snapshots:
 
   '@rollup/pluginutils@5.1.4(rollup@4.38.0)':
     dependencies:
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       estree-walker: 2.0.2
       picomatch: 4.0.2
     optionalDependencies:
@@ -1680,8 +1677,6 @@ snapshots:
   '@tootallnate/once@1.1.2': {}
 
   '@tootallnate/once@2.0.0': {}
-
-  '@types/estree@1.0.6': {}
 
   '@types/estree@1.0.7': {}
 
@@ -2112,11 +2107,11 @@ snapshots:
 
   is-reference@1.2.1:
     dependencies:
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
 
   is-reference@3.0.3:
     dependencies:
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
 
   isarray@1.0.0: {}
 
@@ -2502,12 +2497,12 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  rollup-plugin-svelte@7.2.2(rollup@4.38.0)(svelte@5.25.3):
+  rollup-plugin-svelte@7.2.2(rollup@4.38.0)(svelte@5.25.5):
     dependencies:
       '@rollup/pluginutils': 4.2.1
       resolve.exports: 2.0.2
       rollup: 4.38.0
-      svelte: 5.25.3
+      svelte: 5.25.5
 
   rollup@4.38.0:
     dependencies:
@@ -2701,18 +2696,18 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@6.0.3(sass@1.86.1)(svelte@5.25.3):
+  svelte-preprocess@6.0.3(sass@1.86.1)(svelte@5.25.5):
     dependencies:
-      svelte: 5.25.3
+      svelte: 5.25.5
     optionalDependencies:
       sass: 1.86.1
 
-  svelte@5.25.3:
+  svelte@5.25.5:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
       '@sveltejs/acorn-typescript': 1.0.5(acorn@8.14.1)
-      '@types/estree': 1.0.6
+      '@types/estree': 1.0.7
       acorn: 8.14.1
       aria-query: 5.3.2
       axobject-query: 4.1.0
