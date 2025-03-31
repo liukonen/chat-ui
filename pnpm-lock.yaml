@@ -34,7 +34,7 @@ importers:
         version: 7.2.2(rollup@4.38.0)(svelte@5.25.3)
       sass:
         specifier: ^1.71.1
-        version: 1.86.0
+        version: 1.86.1
       sirv-cli:
         specifier: ^3.0.0
         version: 3.0.1
@@ -43,7 +43,7 @@ importers:
         version: 5.25.3
       svelte-preprocess:
         specifier: ^6.0.0
-        version: 6.0.3(sass@1.86.0)(svelte@5.25.3)
+        version: 6.0.3(sass@1.86.1)(svelte@5.25.3)
 
 packages:
 
@@ -719,8 +719,8 @@ packages:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
 
-  immutable@5.0.3:
-    resolution: {integrity: sha512-P8IdPQHq3lA1xVeBRi5VPqUm5HDgKnx0Ru51wZz5mjxHr5n3RWhjIpOFU7ybkUxfB+5IToy+OLaHYDBIWsv+uw==}
+  immutable@5.1.1:
+    resolution: {integrity: sha512-3jatXi9ObIsPGr3N5hGw/vWWcTkq6hUYhpQz4k0wLC+owqWi/LiugIw9x0EdNZ2yGedKN/HzePiBvaJRXa0Ujg==}
 
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
@@ -1148,8 +1148,8 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
-  sass@1.86.0:
-    resolution: {integrity: sha512-zV8vGUld/+mP4KbMLJMX7TyGCuUp7hnkOScgCMsWuHtns8CWBoz+vmEhoGMXsaJrbUP8gj+F1dLvVe79sK8UdA==}
+  sass@1.86.1:
+    resolution: {integrity: sha512-Yaok4XELL1L9Im/ZUClKu//D2OP1rOljKj0Gf34a+GzLbMveOzL7CfqYo+JUa5Xt1nhTCW+OcKp/FtR7/iqj1w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -2064,7 +2064,7 @@ snapshots:
       safer-buffer: 2.1.2
     optional: true
 
-  immutable@5.0.3: {}
+  immutable@5.1.1: {}
 
   imurmurhash@0.1.4: {}
 
@@ -2553,10 +2553,10 @@ snapshots:
       scss-tokenizer: 0.4.3
       yargs: 17.7.2
 
-  sass@1.86.0:
+  sass@1.86.1:
     dependencies:
       chokidar: 4.0.3
-      immutable: 5.0.3
+      immutable: 5.1.1
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
@@ -2701,11 +2701,11 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@6.0.3(sass@1.86.0)(svelte@5.25.3):
+  svelte-preprocess@6.0.3(sass@1.86.1)(svelte@5.25.3):
     dependencies:
       svelte: 5.25.3
     optionalDependencies:
-      sass: 1.86.0
+      sass: 1.86.1
 
   svelte@5.25.3:
     dependencies:
