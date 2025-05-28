@@ -21,7 +21,7 @@
     messages = [...messages, userMessage, botMessage];
 
     const response = await fetch(
-      `https://bot.liukonen.dev?text=${encodeURIComponent(inputValue)}`
+      `https://ai.liukonen.dev?text=${encodeURIComponent(inputValue)}`
     );
     const data = await response.json();
 
