@@ -28,7 +28,7 @@ devDependencies:
     version: 7.2.2(rollup@4.41.1)(svelte@5.33.11)
   sass:
     specifier: ^1.89.0
-    version: 1.89.0
+    version: 1.89.1
   sirv-cli:
     specifier: ^3.0.1
     version: 3.0.1
@@ -37,7 +37,7 @@ devDependencies:
     version: 5.33.11
   svelte-preprocess:
     specifier: ^6.0.3
-    version: 6.0.3(sass@1.89.0)(svelte@5.33.11)
+    version: 6.0.3(sass@1.89.1)(svelte@5.33.11)
 
 packages:
 
@@ -885,8 +885,8 @@ packages:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
     dev: true
 
-  /sass@1.89.0:
-    resolution: {integrity: sha512-ld+kQU8YTdGNjOLfRWBzewJpU5cwEv/h5yyqlSeJcj6Yh8U4TDA9UA5FPicqDz/xgRPWRSYIQNiFks21TbA9KQ==}
+  /sass@1.89.1:
+    resolution: {integrity: sha512-eMLLkl+qz7tx/0cJ9wI+w09GQ2zodTkcE/aVfywwdlRcI3EO19xGnbmJwg/JMIm+5MxVJ6outddLZ4Von4E++Q==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
@@ -958,7 +958,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-preprocess@6.0.3(sass@1.89.0)(svelte@5.33.11):
+  /svelte-preprocess@6.0.3(sass@1.89.1)(svelte@5.33.11):
     resolution: {integrity: sha512-PLG2k05qHdhmRG7zR/dyo5qKvakhm8IJ+hD2eFRQmMLHp7X3eJnjeupUtvuRpbNiF31RjVw45W+abDwHEmP5OA==}
     engines: {node: '>= 18.0.0'}
     requiresBuild: true
@@ -996,7 +996,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      sass: 1.89.0
+      sass: 1.89.1
       svelte: 5.33.11
     dev: true
 
