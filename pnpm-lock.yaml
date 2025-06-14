@@ -7,7 +7,7 @@ settings:
 devDependencies:
   '@rollup/plugin-commonjs':
     specifier: ^28.0.3
-    version: 28.0.4(rollup@4.43.0)
+    version: 28.0.5(rollup@4.43.0)
   '@rollup/plugin-node-resolve':
     specifier: ^16.0.1
     version: 16.0.1(rollup@4.43.0)
@@ -233,8 +233,8 @@ packages:
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
     dev: true
 
-  /@rollup/plugin-commonjs@28.0.4(rollup@4.43.0):
-    resolution: {integrity: sha512-acOBWsYoaYE9vpgP43huXKkWyFELKl7JYYQSy7MiOSJ26hOoHTt0Eb58WpeEGft1NHnEOUROuMaL3cTjM6BxVQ==}
+  /@rollup/plugin-commonjs@28.0.5(rollup@4.43.0):
+    resolution: {integrity: sha512-lytLp2JgAMwqJY6ve3OSROXr2XuEYHjnsQN3hmnxC+w11dI91LuUw4Yc1kk2FqKXeMG8psoFejFgK+znoij0cg==}
     engines: {node: '>=16.0.0 || 14 >= 14.17'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0||^4.0.0
