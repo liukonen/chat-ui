@@ -1,78 +1,83 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 
 interface Message {
-  id: number;
-  text: string;
-  isUser: boolean;
-  timestamp?: number;
+  id: number
+  text: string
+  isUser: boolean
+  timestamp?: number
 }
 
 const ChatApp = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState('');
-  const [nextId, setNextId] = useState(0);
-  const scrollTarget = useRef<HTMLDivElement>(null);
+  const [messages, setMessages] = useState<Message[]>([])
+  const [inputValue, setInputValue] = useState('')
+  const [nextId, setNextId] = useState(0)
+  const scrollTarget = useRef<HTMLDivElement>(null)
 
   const generateId = () => {
-    const id = nextId;
-    setNextId(id + 1);
-    return id;
-  };
+    const id = nextId
+    setNextId(id + 1)
+    return id
+  }
 
-  const handleSubmit = async () => {
-    if (inputValue.trim() === '') return;
+const handleSubmit = async () => {
+  if (inputValue.trim() === '') return
 
-    const userMessage: Message = {
-      id: generateId(),
-      text: inputValue,
-      isUser: true,
-      timestamp: Date.now(),
-    };
-    const botMessage: Message = {
-      id: generateId(),
-      text: '',
-      isUser: false,
-      timestamp: Date.now(),
-    };
+  // Generate unique IDs for user and bot messages
+  const userId = nextId
+  const botId = nextId + 1
+  setNextId(botId + 1)
 
-    setMessages((prev) => [...prev, userMessage, botMessage]);
+  const userMessage: Message = {
+    id: userId,
+    text: inputValue,
+    isUser: true,
+    timestamp: Date.now(),
+  }
+  const botMessage: Message = {
+    id: botId,
+    text: '',
+    isUser: false,
+    timestamp: Date.now(),
+  }
 
-    try {
-      const response = await fetch(
-        `https://ai.liukonen.dev?text=${encodeURIComponent(inputValue)}`
-      );
-      const data = await response.json();
+  setMessages((prev) => [...prev, userMessage, botMessage])
 
-      setMessages((prev) =>
-        prev.map((message) =>
-          message.id === botMessage.id ? { ...message, text: data.response } : message
-        )
-      );
-    } catch (e) {
-      console.error('Fetch error:', e);
-    }
+  try {
+    const response = await fetch(
+      `https://ai.liukonen.dev?text=${encodeURIComponent(inputValue)}`
+    )
+    const data = await response.json()
 
-    setInputValue('');
-  };
+    setMessages((prev) =>
+      prev.map((message) =>
+        message.id === botId ? { ...message, text: data.response } : message
+      )
+    )
+  } catch (e) {
+    console.error('Fetch error:', e)
+  }
+
+  setInputValue('')
+}
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
-      handleSubmit();
+      handleSubmit()
     }
-  };
+  }
 
   useEffect(() => {
     setMessages((prev) => [
       ...prev,
       { id: generateId(), text: 'Welcome to the chatbot!', isUser: false },
-    ]);
-  }, []);
+    ])
+  }, [])
 
   useEffect(() => {
     if (scrollTarget.current) {
-      scrollTarget.current.scroll({ top: scrollTarget.current.scrollHeight, behavior: 'smooth' });
+      scrollTarget.current.scroll({ top: scrollTarget.current.scrollHeight, behavior: 'smooth' })
     }
-  }, [messages]);
+  }, [messages])
 
   return (
     <div class="container-fluid h-100" id="app">
@@ -134,7 +139,7 @@ const ChatApp = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ChatApp;
+export default ChatApp
