@@ -1,57 +1,64 @@
-# Svelte Chatbot
+# River Chatbot
 
-This is a simple chatbot application built using Svelte. It allows users to interact with a chatbot and display the responses from an API.
+A simple chatbot web application built with [Preact](https://preactjs.com/) and TypeScript. Users can chat with an AI-powered bot, with all messages displayed in a modern, responsive UI.
 
 ## Features
 
-- User can enter messages in the chatbox
-- Chatbot responds with the API's response to the entered message
-- Messages from both the user and chatbot are displayed in the chatbox
+- Send and receive messages in real time
+- Clean, glassmorphic UI styled with SASS and Bootstrap
+- API endpoint configurable in code
+- Fast, production-ready static build
 
 ## Getting Started
 
 ### Installation
 
-1. Clone the repository:
+Clone the repository and install dependencies:
 
-   ```bash
-   git clone <repository-url>
-   ```
-
-2. Install the dependencies
 ```bash
-   npm install
+git clone <repository-url>
+cd chat-ui
+npm install
 ```
 
-## Running the Applciation
+### Development
 
-   To start the application in development mode, run the following command:
+Start the development server:
+
 ```bash
-    npm run dev
+npm run dev
 ```
-This will start the development server, and you can access the application at http://localhost:8080 in your browser.
 
-## Building for Production
-To build the application for production, run the following command:
+Open [http://localhost:8080](http://localhost:8080) in your browser.
+
+### Production Build
+
+Build the optimized static site:
+
 ```bash
-    npm run build
+npm run build
 ```
 
-This will generate optimized and minified files in the public directory.
+The output will be in the `docs/` directory, ready for static hosting (e.g., GitHub Pages).
 
-## Customize the API Endpoint
-By default, the chatbot is configured to call the API at bot.liukonen.dev. If you want to customize the API endpoint, you can modify the API_ENDPOINT constant in the App.svelte file.
+## Configuration
 
-```javascript
-// App.svelte
+The chatbot API endpoint is set in [`src/page.tsx`](src/page.tsx):
 
-const API_ENDPOINT = 'https://bot.liukonen.dev';
+```tsx
+const response = await fetch(
+  `https://ai.liukonen.dev?text=${encodeURIComponent(inputValue)}`
+);
 ```
-Replace 'bot.liukonen.dev' with your desired API endpoint URL.
 
-## Contributing
-Contributions are welcome! If you find any issues or want to add new features to the chatbot, please feel free to submit a pull request.
+To use a different API, change the URL above.
 
-## License 
+## Project Structure
 
-This project is licensed under the MIT License.
+- [`src/`](src/) — Main source code (Preact + TypeScript + SASS)
+- [`docs/`](docs/) — Production build output (static site)
+- [`static/`](static/) — Static assets (favicon, HTML template, etc.)
+
+## License
+
+MIT License © 2023 Luke Liukonen
