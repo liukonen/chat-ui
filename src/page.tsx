@@ -1,83 +1,165 @@
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from "preact/hooks";
 
 interface Message {
-  id: number
-  text: string
-  isUser: boolean
-  timestamp?: number
+  id: number;
+  text: string;
+  isUser: boolean;
+  timestamp?: number;
+  isTyping?: boolean; // <-- add this
 }
 
 const ChatApp = () => {
-  const [messages, setMessages] = useState<Message[]>([])
-  const [inputValue, setInputValue] = useState('')
-  const [nextId, setNextId] = useState(0)
-  const scrollTarget = useRef<HTMLDivElement>(null)
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [nextId, setNextId] = useState(0);
+  const [typingDots, setTypingDots] = useState(""); // <-- add this
+  const [typingBotId, setTypingBotId] = useState<number | null>(null); // <-- add this
+  const scrollTarget = useRef<HTMLDivElement>(null);
 
   const generateId = () => {
-    const id = nextId
-    setNextId(id + 1)
-    return id
-  }
+    const id = nextId;
+    setNextId(id + 1);
+    return id;
+  };
 
-const handleSubmit = async () => {
-  if (inputValue.trim() === '') return
+  // Animate typing dots
+  useEffect(
+    () => {
+      if (typingBotId !== null) {
+        let i = 0;
+        const interval = setInterval(() => {
+          setTypingDots(".".repeat(i % 3 + 1));
+          i++;
+        }, 400);
+        return () => clearInterval(interval);
+      } else {
+        setTypingDots("");
+      }
+    },
+    [typingBotId]
+  );
 
-  // Generate unique IDs for user and bot messages
-  const userId = nextId
-  const botId = nextId + 1
-  setNextId(botId + 1)
+  const handleSubmit = async () => {
+    if (inputValue.trim() === "") return;
 
-  const userMessage: Message = {
-    id: userId,
-    text: inputValue,
-    isUser: true,
-    timestamp: Date.now(),
-  }
-  const botMessage: Message = {
-    id: botId,
-    text: '',
-    isUser: false,
-    timestamp: Date.now(),
-  }
+    // Generate unique IDs for user and bot messages
+    const userId = nextId;
+    const botId = nextId + 1;
+    setNextId(botId + 1);
 
-  setMessages((prev) => [...prev, userMessage, botMessage])
+    const userMessage: Message = {
+      id: userId,
+      text: inputValue,
+      isUser: true,
+      timestamp: Date.now()
+    };
+    const botMessage: Message = {
+      id: botId,
+      text: "",
+      isUser: false,
+      timestamp: Date.now(),
+      isTyping: true // <-- mark as typing
+    };
 
-  try {
-    const response = await fetch(
-      `https://ai.liukonen.dev?text=${encodeURIComponent(inputValue)}`
-    )
-    const data = await response.json()
+    setMessages(prev => [...prev, userMessage, botMessage]);
 
-    setMessages((prev) =>
-      prev.map((message) =>
-        message.id === botId ? { ...message, text: data.response } : message
-      )
-    )
-  } catch (e) {
-    console.error('Fetch error:', e)
-  }
-
-  setInputValue('')
-}
+    setTypingBotId(botId); // <-- start typing animation
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    let didTimeout = false;
+    const timeoutPromise = new Promise((_, reject) => {
+      timeoutId = setTimeout(() => {
+        didTimeout = true;
+        setMessages(prev =>
+          prev.map(
+            message =>
+              message.id === botId
+                ? {
+                    ...message,
+                    text: "Sorry, the bot did not respond in time.",
+                    isTyping: false
+                  }
+                : message
+          )
+        );
+        setTypingBotId(null);
+        reject(new Error("Timeout"));
+      }, 10000);
+    });
+    try {
+      const response = await fetch(
+        `https://ai.liukonen.dev?text=${encodeURIComponent(inputValue)}`
+      );
+      //const data = await response.json()
+      const raceResult = await Promise.race([response, timeoutPromise]);
+      let data: { response: string };
+      if (raceResult instanceof Response) {
+        data = await raceResult.json();
+      } else {
+        data = raceResult as { response: string };
+      }
+      if (!didTimeout) {
+        setMessages(prev =>
+          prev.map(
+            message =>
+              message.id === botId
+                ? { ...message, text: data.response, isTyping: false }
+                : message
+          )
+        );
+        setTypingBotId(null);
+      }
+      //setMessages((prev) =>
+      //  prev.map((message) =>
+      //    message.id === botId ? { ...message, text: data.response } : message
+      //  )
+      // )
+    } catch (e) {
+      if (!didTimeout) {
+        setMessages(prev =>
+          prev.map(
+            message =>
+              message.id === botId
+                ? {
+                    ...message,
+                    text: "Sorry, there was an error getting a response.",
+                    isTyping: false
+                  }
+                : message
+          )
+        );
+        setTypingBotId(null);
+      }
+      console.error("Fetch error:", e);
+    }
+    if (timeoutId) clearTimeout(timeoutId);
+    setInputValue("");
+    //setInputValue('')
+  };
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      handleSubmit()
+    if (event.key === "Enter") {
+      handleSubmit();
     }
-  }
+  };
 
   useEffect(() => {
-    setMessages((prev) => [
+    setMessages(prev => [
       ...prev,
-      { id: generateId(), text: 'Welcome to the chatbot!', isUser: false },
-    ])
-  }, [])
+      { id: generateId(), text: "Welcome to the chatbot!", isUser: false }
+    ]);
+  }, []);
 
-  useEffect(() => {
-    if (scrollTarget.current) {
-      scrollTarget.current.scroll({ top: scrollTarget.current.scrollHeight, behavior: 'smooth' })
-    }
-  }, [messages])
+  useEffect(
+    () => {
+      if (scrollTarget.current) {
+        scrollTarget.current.scroll({
+          top: scrollTarget.current.scrollHeight,
+          behavior: "smooth"
+        });
+      }
+    },
+    [messages]
+  );
 
   return (
     <div class="container-fluid h-100" id="app">
@@ -104,18 +186,26 @@ const handleSubmit = async () => {
 
           <div
             class="card-body msg_card_body scr"
-            style={{ overflow: 'auto' }}
+            style={{ overflow: "auto" }}
             id="dialogue"
             ref={scrollTarget}
           >
-            {messages.map((message) => (
+            {messages.map(message =>
               <div
                 key={message.id}
-                class={`message ${message.isUser ? 'user-message' : ''}`}
+                class={`message ${message.isUser ? "user-message" : ""}`}
               >
-                <div class="message-text">{message.text}</div>
+                <div class="message-text">
+                  {message.isTyping
+                    ? <span>
+                        Bot is typing<span style={{ fontWeight: "bold" }}>
+                          {typingDots}
+                        </span>
+                      </span>
+                    : message.text}
+                </div>
               </div>
-            ))}
+            )}
           </div>
 
           <div class="card-footer">
@@ -128,7 +218,8 @@ const handleSubmit = async () => {
                 autoComplete="off"
                 type="text"
                 value={inputValue}
-                onInput={(e) => setInputValue((e.target as HTMLInputElement).value)}
+                onInput={e =>
+                  setInputValue((e.target as HTMLInputElement).value)}
                 onKeyDown={handleKeyDown}
               />
               <button class="input-group-text send_btn" onClick={handleSubmit}>
@@ -139,7 +230,7 @@ const handleSubmit = async () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ChatApp
+export default ChatApp;
