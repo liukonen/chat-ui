@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import { useAuthToken } from "./tokenManager";
 
 interface Message {
   id: number;
@@ -15,6 +16,24 @@ const ChatApp = () => {
   const [typingDots, setTypingDots] = useState(""); // <-- add this
   const [typingBotId, setTypingBotId] = useState<number | null>(null); // <-- add this
   const scrollTarget = useRef<HTMLDivElement>(null);
+
+  const { getValidToken } = useAuthToken("local-user");
+  const [status, setStatus] = useState<"checking" | "ok" | "error">("checking");
+
+  useEffect(() => {
+    const testToken = async () => {
+      const t = await getValidToken();
+      if (t) {
+        console.log("happy"); // token endpoint reachable
+        setStatus("ok");
+      } else {
+        console.warn("Bot not accessible at the moment");
+        setStatus("error");
+      }
+    };
+
+    testToken();
+  }, []);
 
   const generateId = () => {
     const id = nextId;
