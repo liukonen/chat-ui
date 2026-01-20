@@ -1,27 +1,27 @@
-import { useEffect, useRef, useState, useCallback } from "preact/hooks";
-import { getValidToken } from "./tokenManager";
+import { useEffect, useRef, useState, useCallback } from "preact/hooks"
+import { getValidToken } from "./tokenManager"
 
 interface Message {
-  id: number;
-  text: string;
-  isUser: boolean;
-  timestamp?: number;
-  isTyping?: boolean; // <-- add this
+  id: number
+  text: string
+  isUser: boolean
+  timestamp?: number
+  isTyping?: boolean // <-- add this
 }
 
 const ChatApp = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const [nextId, setNextId] = useState(0);
-  const [typingDots, setTypingDots] = useState(""); // <-- add this
-  const [typingBotId, setTypingBotId] = useState<number | null>(null); // <-- add this
-  const scrollTarget = useRef<HTMLDivElement>(null);
+  const [messages, setMessages] = useState<Message[]>([])
+  const [inputValue, setInputValue] = useState("")
+  const [nextId, setNextId] = useState(0)
+  const [typingDots, setTypingDots] = useState("") // <-- add this
+  const [typingBotId, setTypingBotId] = useState<number | null>(null) // <-- add this
+  const scrollTarget = useRef<HTMLDivElement>(null)
 
   const generateId = () => {
-    const id = nextId;
-    setNextId(id + 1);
-    return id;
-  };
+    const id = nextId
+    setNextId(id + 1)
+    return id
+  }
 
   // Animate typing dots
   useEffect(
@@ -29,47 +29,47 @@ const ChatApp = () => {
       if (typingBotId === null) {
         setTypingDots("")
       } else {
-        let i = 0;
+        let i = 0
         const interval = setInterval(() => {
-          setTypingDots(".".repeat(i % 3 + 1));
-          i++;
-        }, 400);
-        return () => clearInterval(interval);
+          setTypingDots(".".repeat(i % 3 + 1))
+          i++
+        }, 400)
+        return () => clearInterval(interval)
       }
     },
     [typingBotId]
-  );
+  )
 
   const handleSubmit = async () => {
-    if (inputValue.trim() === "") return;
+    if (inputValue.trim() === "") return
 
     // Generate unique IDs for user and bot messages
-    const userId = nextId;
-    const botId = nextId + 1;
-    setNextId(botId + 1);
+    const userId = nextId
+    const botId = nextId + 1
+    setNextId(botId + 1)
 
     const userMessage: Message = {
       id: userId,
       text: inputValue,
       isUser: true,
       timestamp: Date.now()
-    };
+    }
     const botMessage: Message = {
       id: botId,
       text: "",
       isUser: false,
       timestamp: Date.now(),
       isTyping: true // <-- mark as typing
-    };
+    }
 
-    setMessages(prev => [...prev, userMessage, botMessage]);
+    setMessages(prev => [...prev, userMessage, botMessage])
 
-    setTypingBotId(botId); // <-- start typing animation
-    let timeoutId: ReturnType<typeof setTimeout> | null = null;
-    let didTimeout = false;
+    setTypingBotId(botId) // <-- start typing animation
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+    let didTimeout = false
     const timeoutPromise = new Promise((_, reject) => {
       timeoutId = setTimeout(() => {
-        didTimeout = true;
+        didTimeout = true
         setMessages(prev =>
           prev.map(
             message =>
@@ -81,16 +81,16 @@ const ChatApp = () => {
                   }
                 : message
           )
-        );
-        setTypingBotId(null);
-        reject(new Error("Timeout"));
-      }, 10000);
-    });
+        )
+        setTypingBotId(null)
+        reject(new Error("Timeout"))
+      }, 10000)
+    })
     try {
-      const token = await getValidToken();
+      const token = await getValidToken()
       if (!token) {
-        console.warn("Bot not accessible at the moment");
-        return;
+        console.warn("Bot not accessible at the moment")
+        return
       }
 
       const response = await fetch(
@@ -100,14 +100,14 @@ const ChatApp = () => {
             Authorization: `Bearer ${token}`
           }
         }
-      );
+      )
       //const data = await response.json()
-      const raceResult = await Promise.race([response, timeoutPromise]);
-      let data: { response: string };
+      const raceResult = await Promise.race([response, timeoutPromise])
+      let data: { response: string }
       if (raceResult instanceof Response) {
-        data = await raceResult.json();
+        data = await raceResult.json()
       } else {
-        data = raceResult as { response: string };
+        data = raceResult as { response: string }
       }
       if (!didTimeout) {
         setMessages(prev =>
@@ -117,8 +117,8 @@ const ChatApp = () => {
                 ? { ...message, text: data.response, isTyping: false }
                 : message
           )
-        );
-        setTypingBotId(null);
+        )
+        setTypingBotId(null)
       }
       //setMessages((prev) =>
       //  prev.map((message) =>
@@ -138,28 +138,28 @@ const ChatApp = () => {
                   }
                 : message
           )
-        );
-        setTypingBotId(null);
+        )
+        setTypingBotId(null)
       }
-      console.error("Fetch error:", e);
+      console.error("Fetch error:", e)
     }
-    if (timeoutId) clearTimeout(timeoutId);
-    setInputValue("");
+    if (timeoutId) clearTimeout(timeoutId)
+    setInputValue("")
     //setInputValue('')
-  };
+  }
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Enter") {
-      handleSubmit();
+      handleSubmit()
     }
-  };
+  }
 
   useEffect(() => {
     setMessages(prev => [
       ...prev,
       { id: generateId(), text: "Welcome to the chatbot!", isUser: false }
-    ]);
-  }, []);
+    ])
+  }, [])
 
   useEffect(
     () => {
@@ -167,11 +167,11 @@ const ChatApp = () => {
         scrollTarget.current.scroll({
           top: scrollTarget.current.scrollHeight,
           behavior: "smooth"
-        });
+        })
       }
     },
     [messages]
-  );
+  )
 
   return (
     <div class="container-fluid h-100" id="app">
@@ -242,7 +242,7 @@ const ChatApp = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ChatApp;
+export default ChatApp

@@ -1,44 +1,45 @@
 interface AuthState {
-  token: string | null;
-  expiresAt: number;
+  token: string | null
+  expiresAt: number
 }
 
-const TOKEN_BUFFER_MS = 5_000;
-const STORAGE_KEY = "ai.liukonen.dev.auth";
+const TOKEN_BUFFER_MS = 5_000
+const STORAGE_KEY = "ai.liukonen.dev.auth"
 let authState: AuthState = {
   token: null,
   expiresAt: 0,
-};
+}
 
 function loadFromStorage(): void {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
-      const parsed = JSON.parse(stored);
+      const parsed = JSON.parse(stored)
       // Only restore if token hasn't expired yet
       if (parsed.expiresAt > Date.now()) {
-        authState = parsed;
+        authState = parsed
         console.log("Token restored from localStorage, expires in", 
-          Math.round((parsed.expiresAt - Date.now()) / 1000), "seconds");
+          Math.round((parsed.expiresAt - Date.now()) / 1000), "seconds")
       } else {
-        console.log("Stored token expired, will fetch new one");
-        localStorage.removeItem(STORAGE_KEY);
+        console.log("Stored token expired, will fetch new one")
+        localStorage.removeItem(STORAGE_KEY)
+        fetchNewToken()
       }
     }
   } catch (err) {
-    console.error("Failed to load token from storage:", err);
+    console.error("Failed to load token from storage:", err)
   }
 }
 
 function saveToStorage(): void {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(authState));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(authState))
   } catch (err) {
-    console.error("Failed to save token to storage:", err);
+    console.error("Failed to save token to storage:", err)
   }
 }
 
-let inFlight: Promise<string | null> | null = null;
+let inFlight: Promise<string | null> | null = null
 
 async function fetchNewToken(): Promise<string | null> {
   try {
@@ -47,34 +48,34 @@ async function fetchNewToken(): Promise<string | null> {
       headers: {
         Accept: "application/json",
       },
-    });
+    })
 
     if (!res.ok) {
-      throw new Error(`Token request failed: ${res.status}`);
+      throw new Error(`Token request failed: ${res.status}`)
     }
 
-    const data = await res.json();
+    const data = await res.json()
 
     authState = {
       token: data.token,
-      expiresAt: Date.now() + data.expires_in * 1000,
-    };
+      expiresAt: Date.now() + 600 * 1000,
+    }
 
-    console.log("NEW TOKEN ISSUED", authState);
-    saveToStorage();
-    console.log("NEW TOKEN ISSUED, TTL:", data.expires_in, "seconds");
+    console.log("NEW TOKEN ISSUED", authState)
+    saveToStorage()
+    console.log("NEW TOKEN ISSUED, TTL:", 600, "seconds")
 
-    return authState.token;
+    return authState.token
   } catch (err) {
-    console.error("Could not get auth token:", err);
-    authState = { token: null, expiresAt: 0 };
-    return null;
+    console.error("Could not get auth token:", err)
+    authState = { token: null, expiresAt: 0 }
+    return null
   }
 }
 
 export async function getValidToken(): Promise<string | null> {
    if (!authState.token && !inFlight) {
-    loadFromStorage();
+    loadFromStorage()
   }
 
   // ✅ fast path - token is valid
@@ -83,19 +84,19 @@ export async function getValidToken(): Promise<string | null> {
     Date.now() < authState.expiresAt - TOKEN_BUFFER_MS
   ) {
     console.log("Using cached token, expires in", 
-      Math.round((authState.expiresAt - Date.now()) / 1000), "seconds");
-    return authState.token;
+      Math.round((authState.expiresAt - Date.now()) / 1000), "seconds")
+    return authState.token
   }
 
   // ✅ prevent duplicate fetches
   if (inFlight) {
-    console.log("Token fetch already in flight, waiting...");
-    return inFlight;
+    console.log("Token fetch already in flight, waiting...")
+    return inFlight
   }
 
   inFlight = fetchNewToken().finally(() => {
-    inFlight = null;
-  });
+    inFlight = null
+  })
 
-  return inFlight;
+  return inFlight
 }
