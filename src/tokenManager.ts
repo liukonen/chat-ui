@@ -46,5 +46,5 @@ export async function getValidToken(): Promise<string | null> {
     return authState.token;
   }
 
-  return fetchNewToken();
+  return await fetchNewToken();
 }
