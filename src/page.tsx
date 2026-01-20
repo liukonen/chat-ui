@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
-import { useAuthToken } from "./tokenManager";
+import { getValidToken } from "./tokenManager";
 
 interface Message {
   id: number;
@@ -17,9 +17,6 @@ const ChatApp = () => {
   const [typingBotId, setTypingBotId] = useState<number | null>(null); // <-- add this
   const scrollTarget = useRef<HTMLDivElement>(null);
 
- 
- 
- 
   const generateId = () => {
     const id = nextId;
     setNextId(id + 1);
@@ -29,15 +26,15 @@ const ChatApp = () => {
   // Animate typing dots
   useEffect(
     () => {
-      if (typingBotId !== null) {
+      if (typingBotId === null) {
+        setTypingDots("")
+      } else {
         let i = 0;
         const interval = setInterval(() => {
           setTypingDots(".".repeat(i % 3 + 1));
           i++;
         }, 400);
         return () => clearInterval(interval);
-      } else {
-        setTypingDots("");
       }
     },
     [typingBotId]
@@ -90,9 +87,10 @@ const ChatApp = () => {
       }, 10000);
     });
     try {
-      const token = useAuthToken();
+      const token = await getValidToken();
       if (!token) {
-        throw new Error("No valid auth token");
+        console.warn("Bot not accessible at the moment");
+        return;
       }
 
       const response = await fetch(
