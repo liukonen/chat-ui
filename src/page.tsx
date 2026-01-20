@@ -17,23 +17,23 @@ const ChatApp = () => {
   const [typingBotId, setTypingBotId] = useState<number | null>(null); // <-- add this
   const scrollTarget = useRef<HTMLDivElement>(null);
 
-  // const { getValidToken } = useAuthToken("local-user");
-  // const [status, setStatus] = useState<"checking" | "ok" | "error">("checking");
+   const { getValidToken } = useAuthToken("local-user");
+   const [status, setStatus] = useState<"checking" | "ok" | "error">("checking");
 
-  // useEffect(() => {
-  //   const testToken = async () => {
-  //     const t = await getValidToken();
-  //     if (t) {
-  //       console.log("happy"); // token endpoint reachable
-  //       setStatus("ok");
-  //     } else {
-  //       console.warn("Bot not accessible at the moment");
-  //       setStatus("error");
-  //     }
-  //   };
+   useEffect(() => {
+     const testToken = async () => {
+       const t = await getValidToken();
+       if (t) {
+         console.log("happy"); // token endpoint reachable
+         setStatus("ok");
+       } else {
+         console.warn("Bot not accessible at the moment");
+         setStatus("error");
+       }
+     };
 
-  //   testToken();
-  // }, []);
+     testToken();
+   }, []);
 
   const generateId = () => {
     const id = nextId;
