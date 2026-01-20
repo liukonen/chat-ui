@@ -17,23 +17,21 @@ const ChatApp = () => {
   const [typingBotId, setTypingBotId] = useState<number | null>(null); // <-- add this
   const scrollTarget = useRef<HTMLDivElement>(null);
 
-   const { getValidToken } = useAuthToken("local-user");
-   const [status, setStatus] = useState<"checking" | "ok" | "error">("checking");
+  const { getValidToken } = useAuthToken("local-user");
+  const [status, setStatus] = useState<"checking" | "ok" | "error">("checking");
 
-   useEffect(() => {
-     const testToken = async () => {
-       const t = await getValidToken();
-       if (t) {
-         console.log("happy"); // token endpoint reachable
-         setStatus("ok");
-       } else {
-         console.warn("Bot not accessible at the moment");
-         setStatus("error");
-       }
-     };
-
-     testToken();
-   }, []);
+  useEffect(() => {
+    (async () => {
+      const t = await getValidToken();
+      if (t) {
+        console.log("happy");
+        setStatus("ok");
+      } else {
+        console.warn("Bot not accessible");
+        setStatus("error");
+      }
+    })();
+  }, []);
 
   const generateId = () => {
     const id = nextId;
@@ -105,8 +103,18 @@ const ChatApp = () => {
       }, 10000);
     });
     try {
+      const token = await getValidToken();
+      if (!token) {
+        throw new Error("No valid auth token");
+      }
+
       const response = await fetch(
-        `https://ai.liukonen.dev?text=${encodeURIComponent(inputValue)}`
+        `https://ai.liukonen.dev?text=${encodeURIComponent(inputValue)}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
       );
       //const data = await response.json()
       const raceResult = await Promise.race([response, timeoutPromise]);

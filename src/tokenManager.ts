@@ -1,44 +1,52 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useCallback, useRef } from "preact/hooks";
 
-export function useAuthToken(user = "local-user") {
-  const [token, setToken] = useState<string | null>(null);
-  const [expiresAt, setExpiresAt] = useState<number>(0);
 
-  const fetchToken = async () => {
+interface AuthState {
+  token: string | null;
+  expiresAt: number; // epoch ms
+}
+
+const TOKEN_TTL_MS = 10 * 60 * 1000; // 10 minutes
+
+export function useAuthToken(userId: string) {
+  const tokenRef = useRef<string | null>(null);
+  const expiresAtRef = useRef<number>(0);
+
+  const fetchNewToken = async (): Promise<string | null> => {
     try {
       const res = await fetch("https://ai.liukonen.dev/lease", {
-        method: "GET"
+        method: "GET",
+        headers: {
+          Accept: "application/json"
+        }
       });
 
-      if (!res.ok) throw new Error("Failed to fetch token");
+      if (!res.ok) throw new Error("Token request failed");
 
       const data = await res.json();
-      const ttl = data.expires_in || 600; // default 10 minutes
-      setToken(data.token);
-      setExpiresAt(Date.now() + ttl * 1000);
-      console.log("Token fetched:", data.token);
+
+      tokenRef.current = data.token;
+      expiresAtRef.current = Date.now() + data.ttl * 1000;
+
+      return tokenRef.current;
     } catch (err) {
       console.error("Could not get auth token:", err);
-      setToken(null);
-      setExpiresAt(0);
+      tokenRef.current = null;
+      expiresAtRef.current = 0;
+      return null;
     }
   };
 
-  const getValidToken = async () => {
-    if (!token || Date.now() >= expiresAt) {
-      await fetchToken();
+  const getValidToken = useCallback(async (): Promise<string | null> => {
+    if (
+      tokenRef.current &&
+      Date.now() < expiresAtRef.current - 5000 // 5s safety buffer
+    ) {
+      return tokenRef.current;
     }
-    return token;
-  };
 
-  // Auto-refresh token if expired every minute
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (Date.now() >= expiresAt) fetchToken();
-    }, 60_000);
+    return await fetchNewToken();
+  }, []);
 
-    return () => clearInterval(interval);
-  }, [expiresAt]);
-
-  return { token, getValidToken, fetchToken };
+  return { getValidToken };
 }
