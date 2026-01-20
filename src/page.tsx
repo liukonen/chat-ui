@@ -17,22 +17,9 @@ const ChatApp = () => {
   const [typingBotId, setTypingBotId] = useState<number | null>(null); // <-- add this
   const scrollTarget = useRef<HTMLDivElement>(null);
 
-  const { getValidToken } = useAuthToken("local-user");
-  const [status, setStatus] = useState<"checking" | "ok" | "error">("checking");
-
-  useEffect(() => {
-    (async () => {
-      const t = await getValidToken();
-      if (t) {
-        console.log("happy");
-        setStatus("ok");
-      } else {
-        console.warn("Bot not accessible");
-        setStatus("error");
-      }
-    })();
-  }, []);
-
+ 
+ 
+ 
   const generateId = () => {
     const id = nextId;
     setNextId(id + 1);
@@ -103,7 +90,7 @@ const ChatApp = () => {
       }, 10000);
     });
     try {
-      const token = await getValidToken();
+      const token = useAuthToken();
       if (!token) {
         throw new Error("No valid auth token");
       }
