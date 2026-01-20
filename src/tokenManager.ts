@@ -1,5 +1,4 @@
-import { useCallback, useRef } from "preact/hooks";
-
+import { useCallback, useState } from "preact/hooks";
 
 interface AuthState {
   token: string | null;
@@ -9,10 +8,12 @@ interface AuthState {
 const TOKEN_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
 export function useAuthToken(userId: string) {
-  const tokenRef = useRef<string | null>(null);
-  const expiresAtRef = useRef<number>(0);
+  const [authState, setAuthState] = useState<AuthState>({
+    token: null,
+    expiresAt: 0
+  });
 
-  const fetchNewToken = async (): Promise<string | null> => {
+  const fetchNewToken = useCallback(async (): Promise<string | null> => {
     try {
       const res = await fetch("https://ai.liukonen.dev/lease", {
         method: "GET",
@@ -20,33 +21,31 @@ export function useAuthToken(userId: string) {
           Accept: "application/json"
         }
       });
-
       if (!res.ok) throw new Error("Token request failed");
-
       const data = await res.json();
 
-      tokenRef.current = data.token;
-      expiresAtRef.current = Date.now() + data.ttl * 1000;
-
-      return tokenRef.current;
+      const newState = {
+        token: data.token,
+        expiresAt: Date.now() + data.ttl * 1000
+      };
+      setAuthState(newState);
+      return newState.token;
     } catch (err) {
       console.error("Could not get auth token:", err);
-      tokenRef.current = null;
-      expiresAtRef.current = 0;
+      setAuthState({ token: null, expiresAt: 0 });
       return null;
     }
-  };
+  }, []);
 
   const getValidToken = useCallback(async (): Promise<string | null> => {
     if (
-      tokenRef.current &&
-      Date.now() < expiresAtRef.current - 5000 // 5s safety buffer
+      authState.token &&
+      Date.now() < authState.expiresAt - 5000 // 5s safety buffer
     ) {
-      return tokenRef.current;
+      return authState.token;
     }
-
     return await fetchNewToken();
-  }, []);
+  }, [authState, fetchNewToken]);
 
   return { getValidToken };
 }
